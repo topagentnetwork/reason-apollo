@@ -10,15 +10,23 @@ type mutationObj = {
   variables: Js.Json.t,
 };
 
-type generatedApolloClient = {
-  query:
-    [@bs.meth] (queryObj => Js.Promise.t(ReasonApolloQuery.renderPropObjJS)),
-  mutate:
-    [@bs.meth] (
-      mutationObj => Js.Promise.t(ReasonApolloMutation.renderPropObjJS)
-    ),
-  resetStore: [@bs.meth] (unit => Js.Promise.t(unit)),
-};
+type generatedApolloClient;
+
+[@bs.send]
+external query:
+  (generatedApolloClient, queryObj) =>
+  Js.Promise.t(ReasonApolloQuery.renderPropObjJS) =
+  "query";
+
+[@bs.send]
+external mutate:
+  (generatedApolloClient, mutationObj) =>
+  Js.Promise.t(ReasonApolloMutation.renderPropObjJS) =
+  "mutate";
+
+[@bs.send]
+external resetStore: (generatedApolloClient, unit) => Js.Promise.t(unit) =
+  "resetStore";
 
 type fetch;
 
