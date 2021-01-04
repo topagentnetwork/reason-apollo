@@ -139,20 +139,20 @@ module Make = (Config: Config) => {
   [@react.component]
   let make =
       (
-        ~variables=?,
-        ~pollInterval=?,
-        ~notifyOnNetworkStatusChange=?,
-        ~fetchPolicy=?,
-        ~errorPolicy=?,
-        ~ssr=?,
-        ~displayName=?,
-        ~skip=?,
-        ~onCompleted=?,
-        ~onError=?,
-        ~partialRefetch=?,
-        ~delay=?,
-        ~context=?,
-        ~children,
+        ~variables: option(Js.Json.t)=?,
+        ~pollInterval: option(int)=?,
+        ~notifyOnNetworkStatusChange: option(bool)=?,
+        ~fetchPolicy: option(string)=?,
+        ~errorPolicy: option(string)=?,
+        ~ssr: option(bool)=?,
+        ~displayName: option(string)=?,
+        ~skip: option(bool)=?,
+        ~onCompleted: option(Js.Nullable.t(Js.Json.t) => unit)=?,
+        ~onError: option(apolloError => unit)=?,
+        ~partialRefetch: option(bool)=?,
+        ~delay: option(bool)=?,
+        ~context: option(Js.Json.t)=?,
+        ~children: renderPropObj => React.element,
       ) =>
     <JsQuery
       query=graphqlQueryAST
